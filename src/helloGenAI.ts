@@ -8,7 +8,7 @@ const llm = new ChatOpenAI({
 });
 
 const main = async () => {
-  const response = await llm.invoke("What is the capital of France?");
+  const response = await llm.invoke("best stocks to buy right now");
 
   console.log(`Response: ${response.content}`);
 };
