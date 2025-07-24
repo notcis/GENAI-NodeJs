@@ -8,7 +8,9 @@ const llm = new ChatOpenAI({
 });
 
 const main = async () => {
-  const response = await llm.invoke("best stocks to buy right now");
+  const response = await llm.invoke(
+    "how many time to excecise in a week to get fit?"
+  );
 
   console.log(`Response: ${response.content}`);
 };
