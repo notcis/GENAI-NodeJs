@@ -2,7 +2,7 @@ import { PromptTemplate } from "@langchain/core/prompts";
 import { ChatOpenAI } from "@langchain/openai";
 import dotenv from "dotenv";
 import { StringOutputParser } from "@langchain/core/output_parsers";
-import { LLMChain } from "langchain/chains";
+import { RunnableSequence } from "@langchain/core/runnables";
 dotenv.config();
 
 async function personalisedPitch(
@@ -12,8 +12,7 @@ async function personalisedPitch(
 ) {
   // Create a prompt template for the personalised pitch
   const promptTemplate = new PromptTemplate({
-    template:
-      "Describe the importance of {course} for a {role}. Limit the output to {wordLimit} words.",
+    template: "อธิบาย {course} สำหรับ {role}. จำกัดผลลัพธ์ที่ {wordLimit} คำ.",
     inputVariables: ["course", "role", "wordLimit"],
   });
 
@@ -28,28 +27,28 @@ async function personalisedPitch(
   // Initialize the ChatOpenAI model
   const llm = new ChatOpenAI({
     model: "gpt-4o",
+    //temperature: 1,
+    topP: 1,
+    maxTokens: 150,
   });
 
   // Create an output parser to handle the response format
   const outputParser = new StringOutputParser();
 
+  //const lcelChain = promptTemplate.pipe(llm).pipe(outputParser);
+
   // Create the LLMChain with the prompt template and output parser
-  const legacyLlmChain = new LLMChain({
-    llm,
-    prompt: promptTemplate,
-    outputParser,
-  });
+  const lcelChain = RunnableSequence.from([promptTemplate, llm, outputParser]);
 
   // Invoke the LLMChain with the formatted response
-  const answer = await legacyLlmChain.invoke({
+  const lcelResponse = await lcelChain.invoke({
     course,
     role,
     wordLimit,
   });
-
-  console.log(`Answer: ${answer.text}`);
+  console.log(`LCEL Response: ${lcelResponse}`);
 }
 
-personalisedPitch("AWS", "cloud engineer", 100)
+personalisedPitch("next.js", "frontend developer", 100)
   .then(() => console.log("Done"))
   .catch((error) => console.error("Error:", error));
