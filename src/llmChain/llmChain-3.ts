@@ -53,6 +53,6 @@ async function personalisedPitch(
   console.log(`LCEL Response: ${lcelResponse}`);
 }
 
-personalisedPitch("next.js", "frontend developer", 100)
+personalisedPitch("php", "backend developer", 150)
   .then(() => console.log("Done"))
   .catch((error) => console.error("Error:", error));
