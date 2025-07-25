@@ -1,8 +1,9 @@
 import { PromptTemplate } from "@langchain/core/prompts";
-import { ChatOpenAI } from "@langchain/openai";
 import dotenv from "dotenv";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { RunnableSequence } from "@langchain/core/runnables";
+import { BedrockChat } from "@langchain/community/chat_models/bedrock";
+
 dotenv.config();
 
 async function personalisedPitch(
@@ -25,11 +26,14 @@ async function personalisedPitch(
   console.log(`prompt: ${response}`);
 
   // Initialize the ChatOpenAI model
-  const llm = new ChatOpenAI({
-    model: "gpt-4o",
-    //temperature: 1,
-    topP: 1,
+  const llm = new BedrockChat({
+    model: "anthropic.claude-v2",
     maxTokens: 200,
+    region: process.env.AWS_REGION,
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    },
   });
 
   // Create an output parser to handle the response format
