@@ -26,6 +26,7 @@
     "@langchain/core": "^0.3.66",
     "@langchain/openai": "^0.6.2",
     "@langchain/pinecone": "^0.2.0",
+    "@pinecone-database/pinecone": "^6.1.2",
     "@smithy/eventstream-codec": "^2.2.0",
     "@smithy/protocol-http": "^5.1.2",
     "@smithy/signature-v4": "^5.1.2",
@@ -33,6 +34,7 @@
     "cheerio": "^1.1.2",
     "cli-progress": "^3.12.0",
     "dotenv": "^16.4.5",
-    "langchain": "^0.3.30"
+    "langchain": "^0.3.30",
+    "langsmith": "^0.3.49"
   }
 }
