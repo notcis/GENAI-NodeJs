@@ -13,7 +13,7 @@ async function main() {
   //const rawDocuments = await loadDocuments();
 
   // 1. โหลดเอกสารจาก URL โดยใช้ CheerioWebBaseLoader
-  const loader = new CheerioWebBaseLoader("https://line.coopmsds.com/loan", {
+  const loader = new CheerioWebBaseLoader("https://line.coopmsds.com/saving", {
     selector: ".wrapper",
   });
 
@@ -52,4 +52,5 @@ async function main() {
 /* main().catch((error) => {
   console.error("Error during vectorization:", error);
   process.exit(1);
-}); */
+});
+ */
