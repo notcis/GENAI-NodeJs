@@ -9,8 +9,9 @@ export async function splitDocuments(
 
   // Ensure that rawDocuments is an array of Document objects
   const splitter = new RecursiveCharacterTextSplitter({
-    chunkSize: 800,
-    chunkOverlap: 50,
+    separators: ["\r\n\r\n"],
+    chunkSize: 500,
+    chunkOverlap: 100,
   });
 
   // Split the documents into chunks

@@ -30,6 +30,8 @@ async function main() {
   const llm = new ChatOpenAI({
     model: "gpt-4o",
     maxTokens: 500,
+    temperature: 0.3,
+    topP: 0.5,
   });
 
   // สร้าง output parser เพื่อจัดการผลลัพธ์ที่ได้จาก LLM
